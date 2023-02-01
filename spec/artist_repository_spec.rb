@@ -25,4 +25,13 @@ RSpec.describe ArtistRepository do
 
   end
 
+    it 'finds an artist matching the id' do
+
+    repo = ArtistRepository.new
+
+    artist = repo.find(1)
+    expect(artist.name).to eq 'Pixies'
+
+  end
+
 end
