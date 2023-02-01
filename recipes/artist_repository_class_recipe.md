@@ -138,14 +138,25 @@ end
 
   # Add more methods below for each operation you'd like to implement.
 
-  # def create(student)
-  # end
+  
+  def create(artist)
+    #INSERT INTO artists (name,genre) VALUES($1,$2);
 
-  # def update(student)
-  # end
+    #Doesn't need to return as only creates
+  end
 
-  # def delete(student)
-  # end
+  def delete(id)
+    #DELETE FROM artists WHERE id = $1;
+
+    #Doesn't need to return as only deletes
+  end
+
+  def update(artist)
+    #UPDATE artists SET name = $1, genre = $2 WHERE id = $3;
+    #Doesn't need to return as only updates
+  end
+
+
 end
 ```
 
@@ -176,6 +187,42 @@ repo = ArtistRepository.new
 artist = repo.find(1)[0]
 
 artist.name # => "Pixies"
+
+# 3
+# Creates a new artist
+
+repo = ArtistRepository.new
+
+artist = Artist.new
+artist.name = 'Daft Punk'
+artist.genre = 'Electronic'
+
+repo.all.last.name # => artist.name
+
+# 4 
+# Delete an artist
+repo = ArtistRepository.new
+artist = repo.find(1)
+repo.delete(artist.id)
+
+repo.all.length # => 1
+
+# 5
+# update an artist
+repo = ArtistRepository.new
+
+artist = repo.find(1)
+
+artist.name = 'Bingo'
+artist.genre = 'Dubstep'
+
+repo.update(artist)
+
+updated_artist = repo.find(1)
+
+updated_artist.name # => 'Bingo'
+updated_artist.genre# => 'Dubstep'
+
 
 ```
 
